@@ -1,0 +1,83 @@
+variable,type,description,role
+id,identifier,"Participant number 1-10,000. Rows are in random order (not sorted by clinic).",ID
+site_id,categorical (100),Clinic identifier S001-S100; 50 to 192 participants per clinic. Clustering variable.,Cluster / grouping
+region,categorical (4),"Region of the clinic: North, South, East, West.",Predictor / group
+site_type,categorical (3),"Clinic setting: urban, suburban, rural.",Predictor / group
+treatment_arm,categorical (3),"Randomised programme, balanced within clinics: control, program_A, program_B.",Group / predictor
+age,integer,Age in years at baseline (19-87).,Predictor
+sex,binary (text),female / male.,Predictor
+education,ordinal (text),"Highest education, ordered: secondary or less < vocational < bachelor < postgraduate.",Predictor / MCA
+employment,categorical (5),"employed, self-employed, unemployed, retired, student.",Predictor / MCA
+income_k,continuous,Annual household income in thousands. Right-skewed. About 5% missing (depends on age and education).,Predictor; missing data
+height_cm,continuous,Height in cm.,Predictor (collinear block)
+weight_kg,continuous,Baseline weight in kg.,Predictor (collinear block)
+bmi,continuous,Body mass index = weight / height^2.,Predictor (collinear block)
+waist_cm,continuous,Waist circumference in cm. About 4% missing at random.,Predictor (collinear block)
+smoker,categorical (3),never / former / current.,Predictor / MCA
+diet_type,categorical (4),"omnivore, pescatarian, vegetarian, vegan.",Predictor / MCA
+diet_score,continuous,Diet-quality score 0-100 (higher = healthier).,Lifestyle block / clustering
+sleep_hours,continuous,Usual nightly sleep in hours.,Lifestyle block / clustering
+screen_hours,continuous,Daily recreational screen time in hours.,Lifestyle block / clustering
+family_history,binary 0/1,1 = family history of cardiovascular disease.,Predictor
+rare_variant,binary 0/1,1 = carries a rare genetic variant (about 0.6% of people).,Predictor (separation trap)
+training_min_week,integer,Weekly recorded training minutes (0-630). Many zeros; dose variable for fitness_score.,Predictor
+exercise_hours_week,continuous,"Self-reported weekly exercise hours, quarter-hour steps. Floored at 0 (about 21% are exactly 0: left-censored).",OUTCOME: quantitative (censored)
+days_worn,integer,Number of days (1-14) the step tracker was worn.,Weights for WLS
+mean_daily_steps_k,continuous,Average daily steps (thousands) over days_worn days; fewer days = noisier value.,OUTCOME: quantitative (non-constant variance)
+cigs_per_day,count,Cigarettes per day. About 83% zeros.,OUTCOME: count (zero-inflated)
+alcohol_units_week,count,Alcohol units per week. About 20% zeros (abstainers).,OUTCOME: count (hurdle)
+wb1,ordinal 1-5,"Wellbeing item 1: ""I feel cheerful"". 1 = strongly disagree ... 5 = strongly agree. About 1.5% missing.",Likert item (wellbeing)
+wb2,ordinal 1-5,"Wellbeing item 2: ""I feel calm and relaxed"".",Likert item (wellbeing)
+wb3,ordinal 1-5,"Wellbeing item 3: ""I feel active and energetic"". Weakly cross-loads on stress.",Likert item (wellbeing)
+wb4,ordinal 1-5,"Wellbeing item 4: ""I often feel down"". REVERSE-WORDED.","Likert item (wellbeing, reversed)"
+st1,ordinal 1-5,"Stress item 1: ""I feel overwhelmed by demands"". About 3% missing (more in older people).",Likert item (stress)
+st2,ordinal 1-5,"Stress item 2: ""I feel unable to control important things"".",Likert item (stress)
+st3,ordinal 1-5,"Stress item 3: ""I feel nervous or tense"".",Likert item (stress)
+st4,ordinal 1-5,"Stress item 4: ""I find it hard to unwind"".",Likert item (stress)
+ss1,ordinal 1-5,"Social-support item 1: ""I have people I can rely on"".",Likert item (support)
+ss2,ordinal 1-5,"Social-support item 2: ""I can talk about my problems with friends or family"".",Likert item (support)
+ss3,ordinal 1-5,"Social-support item 3: ""I feel part of a community"".",Likert item (support)
+ss4,ordinal 1-5,"Social-support item 4: ""I often feel alone"". REVERSE-WORDED.","Likert item (support, reversed)"
+sbp,integer,"Baseline systolic blood pressure, mmHg.",OUTCOME: quantitative (normal) / biomarker panel
+dbp,integer,"Baseline diastolic blood pressure, mmHg.",Biomarker panel
+total_chol,integer,"Total cholesterol, mg/dL. Roughly = ldl + hdl + triglycerides/5, so nearly redundant.",Biomarker panel (collinear)
+ldl,integer,"LDL cholesterol, mg/dL.",Biomarker panel
+hdl,integer,"HDL cholesterol, mg/dL. About 3% missing at random.",Biomarker panel
+triglycerides,integer,"Triglycerides, mg/dL. Right-skewed (try log).",Biomarker panel
+glucose,integer,"Fasting glucose, mg/dL. Right-skewed.",Biomarker panel
+hba1c,continuous,"HbA1c, %. Tracks glucose closely.",Biomarker panel
+crp,continuous,"C-reactive protein, mg/L. Very right-skewed. About 5% missing at random.",Biomarker panel
+resting_hr,integer,"Resting heart rate, beats per minute.",Biomarker panel
+lab_marker_01,continuous,"Assay value, arbitrary units (mean 100, SD 15). Block A: markers 01-05 are highly correlated.",Many correlated predictors (lasso / ridge / PCA)
+lab_marker_02,continuous,"Assay value, arbitrary units (mean 100, SD 15). Block A: markers 01-05 are highly correlated.",Many correlated predictors (lasso / ridge / PCA)
+lab_marker_03,continuous,"Assay value, arbitrary units (mean 100, SD 15). Block A: markers 01-05 are highly correlated.",Many correlated predictors (lasso / ridge / PCA)
+lab_marker_04,continuous,"Assay value, arbitrary units (mean 100, SD 15). Block A: markers 01-05 are highly correlated.",Many correlated predictors (lasso / ridge / PCA)
+lab_marker_05,continuous,"Assay value, arbitrary units (mean 100, SD 15). Block A: markers 01-05 are highly correlated.",Many correlated predictors (lasso / ridge / PCA)
+lab_marker_06,continuous,"Assay value, arbitrary units (mean 100, SD 15). Block B: markers 06-10 are highly correlated.",Many correlated predictors (lasso / ridge / PCA)
+lab_marker_07,continuous,"Assay value, arbitrary units (mean 100, SD 15). Block B: markers 06-10 are highly correlated.",Many correlated predictors (lasso / ridge / PCA)
+lab_marker_08,continuous,"Assay value, arbitrary units (mean 100, SD 15). Block B: markers 06-10 are highly correlated.",Many correlated predictors (lasso / ridge / PCA)
+lab_marker_09,continuous,"Assay value, arbitrary units (mean 100, SD 15). Block B: markers 06-10 are highly correlated.",Many correlated predictors (lasso / ridge / PCA)
+lab_marker_10,continuous,"Assay value, arbitrary units (mean 100, SD 15). Block B: markers 06-10 are highly correlated.",Many correlated predictors (lasso / ridge / PCA)
+lab_marker_11,continuous,"Assay value, arbitrary units (mean 100, SD 15). Block C: markers 11-15 are highly correlated.",Many correlated predictors (lasso / ridge / PCA)
+lab_marker_12,continuous,"Assay value, arbitrary units (mean 100, SD 15). Block C: markers 11-15 are highly correlated.",Many correlated predictors (lasso / ridge / PCA)
+lab_marker_13,continuous,"Assay value, arbitrary units (mean 100, SD 15). Block C: markers 11-15 are highly correlated.",Many correlated predictors (lasso / ridge / PCA)
+lab_marker_14,continuous,"Assay value, arbitrary units (mean 100, SD 15). Block C: markers 11-15 are highly correlated.",Many correlated predictors (lasso / ridge / PCA)
+lab_marker_15,continuous,"Assay value, arbitrary units (mean 100, SD 15). Block C: markers 11-15 are highly correlated.",Many correlated predictors (lasso / ridge / PCA)
+sbp_wk6,integer,Systolic BP at week 6 of the programme. NA (6%) = lost to follow-up (all five follow-up columns).,Repeated measure / MANOVA
+sbp_wk12,integer,Systolic BP at week 12.,Repeated measure / MANOVA
+ldl_wk12,integer,"LDL cholesterol at week 12, mg/dL.",MANOVA outcome
+hba1c_wk12,continuous,"HbA1c at week 12, %.",MANOVA outcome
+weight_wk12,continuous,"Weight at week 12, kg. 60 values were wrongly recorded in pounds.",MANOVA outcome / OUTCOME: quantitative (outliers)
+hypertension,binary 0/1,Diagnosed hypertension (about 28%). Clinic-level clustering.,OUTCOME: binary
+rare_event,binary 0/1,"Serious adverse event (about 1.1%, 111 events).",OUTCOME: binary (rare)
+primary_condition,categorical (4),"Main diagnosed condition: none, metabolic, cardiovascular, respiratory.",OUTCOME: multinomial / classification target
+self_rated_health,ordinal 1-5,"1 = poor, 2 = fair, 3 = good, 4 = very good, 5 = excellent.",OUTCOME: ordinal
+exposure_years,continuous,Length of the observation window (0.5-3 years) over which visits were counted.,Offset for counts
+gp_visits,count,GP visits during the window.,OUTCOME: count (Poisson)
+er_visits,count,Emergency-room visits during the window. About 60% zeros.,OUTCOME: count (overdispersed)
+annual_cost,integer,Annual healthcare cost in dollars (at least 1). Strongly right-skewed.,OUTCOME: quantitative (skewed)
+fitness_score,continuous,Fitness index 0-100.,OUTCOME: quantitative (nonlinear)
+adherence_prop,proportion,Proportion of programme sessions attended; strictly between 0 and 1.,OUTCOME: proportion
+bp_in_target_prop,proportion,Proportion of home BP readings in the target range; contains exact 0s (9%) and 1s (16%).,OUTCOME: proportion (0/1 inflated)
+time_to_event_months,continuous,"Months from baseline to first cardiovascular event, or to censoring (maximum 60).",OUTCOME: time-to-event
+event_observed,binary 0/1,1 = event happened; 0 = censored (administrative end at 60 months or lost). 28% events.,OUTCOME: time-to-event

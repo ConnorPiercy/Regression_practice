@@ -1,0 +1,341 @@
+{
+ "site_random_effect_sd": {
+  "sbp_int": 4.0,
+  "sbp_age_slope": 0.1,
+  "hyp": 0.35,
+  "er": 0.3,
+  "adh": 0.25,
+  "cost": 0.15,
+  "fit": 1.5,
+  "frailty": 0.25
+ },
+ "segments": {
+  "names": [
+   "active_balanced",
+   "sedentary_screen",
+   "social_drinkers_smokers",
+   "busy_short_sleepers"
+  ],
+  "proportions": [
+   0.32,
+   0.28,
+   0.25,
+   0.15
+  ],
+  "latent_means_act_diet_sleep_screen_alc_smoke": [
+   [
+    1.8,
+    1.4,
+    0.2,
+    -1.0,
+    -0.4,
+    -0.8
+   ],
+   [
+    -1.8,
+    -0.8,
+    -0.4,
+    2.0,
+    0.0,
+    0.2
+   ],
+   [
+    0.2,
+    -1.4,
+    -1.0,
+    0.4,
+    2.4,
+    1.8
+   ],
+   [
+    -0.4,
+    -0.4,
+    -2.2,
+    0.8,
+    0.6,
+    0.4
+   ]
+  ]
+ },
+ "likert_items": {
+  "wb1": {
+   "factor": "wellbeing",
+   "loading": 0.78,
+   "cross_loading_on_stress": 0
+  },
+  "wb2": {
+   "factor": "wellbeing",
+   "loading": 0.74,
+   "cross_loading_on_stress": 0
+  },
+  "wb3": {
+   "factor": "wellbeing",
+   "loading": 0.7,
+   "cross_loading_on_stress": -0.2
+  },
+  "wb4": {
+   "factor": "wellbeing",
+   "loading": -0.62,
+   "cross_loading_on_stress": 0
+  },
+  "st1": {
+   "factor": "stress",
+   "loading": 0.8,
+   "cross_loading_on_stress": 0
+  },
+  "st2": {
+   "factor": "stress",
+   "loading": 0.76,
+   "cross_loading_on_stress": 0
+  },
+  "st3": {
+   "factor": "stress",
+   "loading": 0.7,
+   "cross_loading_on_stress": 0
+  },
+  "st4": {
+   "factor": "stress",
+   "loading": 0.66,
+   "cross_loading_on_stress": 0
+  },
+  "ss1": {
+   "factor": "support",
+   "loading": 0.82,
+   "cross_loading_on_stress": 0
+  },
+  "ss2": {
+   "factor": "support",
+   "loading": 0.74,
+   "cross_loading_on_stress": 0
+  },
+  "ss3": {
+   "factor": "support",
+   "loading": 0.68,
+   "cross_loading_on_stress": 0
+  },
+  "ss4": {
+   "factor": "support",
+   "loading": -0.6,
+   "cross_loading_on_stress": 0
+  }
+ },
+ "factor_correlations_wb_st_ss": [
+  [
+   1.0,
+   -0.55,
+   0.4
+  ],
+  [
+   -0.55,
+   1.0,
+   -0.25
+  ],
+  [
+   0.4,
+   -0.25,
+   1.0
+  ]
+ ],
+ "sbp": {
+  "intercept": 118.0,
+  "age_c": 0.4,
+  "bmi_c": 0.8,
+  "male": 4.5,
+  "smoker_current": 1.5,
+  "alcohol_units": 0.12,
+  "sleep_hours_minus7": -0.8,
+  "stress_latent_sd": 2.0,
+  "exercise_hours": -0.35,
+  "lab_marker_03_z": 3.0,
+  "lab_marker_07_z": 2.2,
+  "lab_marker_12_z": -2.5,
+  "resid_sd": 13.0
+ },
+ "trial_effects_by_arm_control_A_B": {
+  "sbp6": [
+   -1.0,
+   -4.0,
+   -2.0
+  ],
+  "sbp12": [
+   -1.5,
+   -8.5,
+   -4.0
+  ],
+  "ldl": [
+   -1.0,
+   -4.0,
+   -14.0
+  ],
+  "a1c": [
+   0.0,
+   -0.1,
+   -0.35
+  ],
+  "wt": [
+   -0.4,
+   -2.2,
+   -1.0
+  ]
+ },
+ "followup_noise_sd_by_arm_sbp_ldl_a1c_weight": {
+  "control": [
+   8.0,
+   14.0,
+   0.25,
+   2.0
+  ],
+  "program_A": [
+   8.0,
+   14.0,
+   0.25,
+   2.0
+  ],
+  "program_B": [
+   8.0,
+   22.0,
+   0.4,
+   2.0
+  ]
+ },
+ "hypertension_logit": {
+  "age_c": 0.045,
+  "bmi_c": 0.07,
+  "male": 0.5,
+  "smoker_current": 0.35,
+  "alcohol_units": 0.02,
+  "family_history": 0.5,
+  "stress_latent_sd": 0.25,
+  "bmi_over_32_and_age_over_50": 0.9,
+  "exercise_hours": -0.08,
+  "site_re_sd": 0.35,
+  "intercept": -1.9165209173918383
+ },
+ "rare_event_logit": {
+  "age_c": 0.02,
+  "smoker_current": 0.35,
+  "family_history": 0.5,
+  "bmi_c": 0.03,
+  "rare_variant": "all carriers have the event (quasi-complete separation)",
+  "intercept": -5.58399390674785
+ },
+ "primary_condition_multinomial_logit_vs_none": {
+  "intercepts": {
+   "metabolic": -2.023,
+   "cardiovascular": -2.441,
+   "respiratory": -2.826
+  },
+  "metabolic": "0.15*bmi_c + 1.6*(hba1c-5.4) + 0.01*age_c + 1.8*(bmi>30 & age>45)",
+  "cardiovascular": "0.06*age_c + 0.040*(sbp-125) + 0.018*(ldl-112) + 0.9*current_smoker + 0.7*family_history + 1.5*(sbp>140 & ldl>130)",
+  "respiratory": "1.8*current_smoker + 0.9*former_smoker + 0.03*age_c + 0.30*log(crp)"
+ },
+ "self_rated_health_ordinal_logit": {
+  "coefficients": {
+   "wellbeing_latent": 0.75,
+   "stress_latent": -0.25,
+   "age_c": -0.02,
+   "bmi_c": -0.03,
+   "exercise_hours": 0.08,
+   "any_condition": -0.55,
+   "income_k_minus40": 0.006,
+   "current_smoker": -0.3
+  },
+  "thresholds": [
+   -3.461,
+   -1.561,
+   0.354,
+   2.17
+  ],
+  "model": "proportional odds (logistic errors)"
+ },
+ "gp_visits_poisson_log_rate": {
+  "age_c": 0.012,
+  "bmi_c": 0.02,
+  "any_condition": 0.35,
+  "male": -0.2,
+  "stress_latent_sd": 0.1,
+  "intercept": 1.0201419189319685,
+  "offset": "log(exposure_years)",
+  "dispersion": "variance = mean (Poisson)"
+ },
+ "er_visits_negbin_log_rate": {
+  "age_c": 0.01,
+  "smoker_current": 0.3,
+  "resp_condition": 0.5,
+  "stress_latent_sd": 0.2,
+  "urban": 0.1,
+  "site_re_sd": 0.3,
+  "nb_theta": 0.8,
+  "intercept": -0.9422661713128848,
+  "offset": "log(exposure_years)"
+ },
+ "cigs_per_day": "zero-inflated: never/former smokers are structural zeros; 30% of current smokers are occasional (Poisson mean 1.5); regular smokers NB(mean ~12, theta 6)",
+ "alcohol_units_week": "hurdle: P(drink)=expit(0.9+0.6*male-0.015*age_c+0.75*alc_latent+0.1*edu); positives zero-truncated NB(theta 3)",
+ "annual_cost_gamma_log_link": {
+  "intercept": 7.0,
+  "age_c": 0.012,
+  "bmi_c": 0.03,
+  "smoker_current": 0.22,
+  "any_condition": 0.35,
+  "cardiovascular_extra": 0.25,
+  "site_re_sd": 0.15,
+  "gamma_shape": 1.4
+ },
+ "fitness_score": {
+  "base": 28,
+  "vmax": 52,
+  "K": 110,
+  "age_quad": -0.009,
+  "age_peak": 32,
+  "bmi_c": -0.45,
+  "male": 3.0,
+  "site_re_sd": 1.5,
+  "resid_sd": 4.0,
+  "form": "base + vmax*training/(K+training) + age_quad*(age-age_peak)^2 + bmi_c*(bmi-25) + male*male"
+ },
+ "adherence_prop_beta_logit_mean": {
+  "intercept": 0.45,
+  "age_c": 0.015,
+  "edu_level_0to3": 0.1,
+  "stress_latent_sd": -0.15,
+  "program_A": 0.3,
+  "program_B": 0.45,
+  "site_re_sd": 0.25,
+  "beta_phi": 8
+ },
+ "bp_in_target_prop_zero_one_inflated_beta": {
+  "p0": "expit(-2.3 + 0.03*(sbp-125))",
+  "p1": "expit(-1.9 - 0.04*(sbp-125))",
+  "beta_mean": "expit(0.2 - 0.025*(sbp-125) + 0.4*programA + 0.3*programB)",
+  "beta_phi": 5
+ },
+ "time_to_event_weibull_ph": {
+  "age_c": 0.035,
+  "bmi_c": 0.03,
+  "smoker_current": 0.45,
+  "smoker_former": 0.2,
+  "sbp_minus125": 0.004,
+  "family_history": 0.3,
+  "hba1c_minus5_4": 0.25,
+  "exercise_hours": -0.04,
+  "cardiovascular_condition": 0.7,
+  "metabolic_condition": 0.3,
+  "program_A": -0.35,
+  "program_B": -0.15,
+  "frailty_sd": 0.25,
+  "weibull_shape": 1.3,
+  "admin_censor_months": 60,
+  "dropout_fraction_by_60m": 0.12,
+  "log_baseline_lambda": -6.603
+ },
+ "daily_series": {
+  "trend_per_day": 0.012,
+  "flu_index_per_unit": 0.35,
+  "temp_per_degC": -0.9,
+  "monday": 12,
+  "weekend": -22,
+  "holiday": -25,
+  "ar1_phi": 0.7,
+  "ar1_innovation_sd": 6
+ }
+}
