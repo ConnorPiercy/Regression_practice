@@ -73,7 +73,7 @@ test_data <- data.frame(
 ##############################################################################
 
 class_columns <- function(data, indicators = character(),
-                         conf_prefix = "conf_") {
+                          conf_prefix = "conf_") {
   cols <- names(data)
   
   if (anyDuplicated(cols)){
@@ -139,7 +139,7 @@ class_columns <- function(data, indicators = character(),
   data <- data[, column_order, drop = FALSE]
   
   attr(data, "pairs") <- pairs
-
+  
   
   return(data)
 }
@@ -147,11 +147,14 @@ class_columns <- function(data, indicators = character(),
 ##############################################################################
 #Test
 classed_columns <- class_columns(data = test_data,
-             indicators = c("Visit_hospital")
-             )
+                                 indicators = c("Visit_hospital")
+)
 
 ##############################################################################
-#FUNCTION - 2. Calculate difference between raw and conf columns
+#FUNCTION - 2. Calculate LOSS between raw and conf columns
+# loss = amount in raw that is not in conf, per row (never negative).
+# e.g. raw = 100, conf = 80 -> loss = 20.  raw = 100, conf = 105 -> loss = 0.
+# NOTE: columns keep the "_dist" suffix so the rest of the pipeline is unchanged.
 ##############################################################################
 distance <- function(data) {
   
@@ -167,7 +170,7 @@ distance <- function(data) {
     conf_col <- pair_table$conf_name[i]
     
     data[[paste0(raw_col, "_dist")]] <-
-      abs(data[[raw_col]] - data[[conf_col]])
+      pmax(data[[raw_col]] - data[[conf_col]], 0)
   }
   return(data)
 }
@@ -191,7 +194,7 @@ class_distance <- function(data, indicators = character(),
   distance_data <- distance(
     data = classified_data
   )
-
+  
   return(distance_data)
 }
 
@@ -229,11 +232,11 @@ plot_builders <- list(
       ggplot2::labs(
         title = paste(variable, "by", x_axis),
         subtitle = paste0(
-          "Percentage distance relative to raw total | grouped by ",
+          "Loss as % of raw total | grouped by ",
           group_label
         ),
         x = x_axis,
-        y = "Distance (%)",
+        y = "Loss (%)",
         colour = "Subgroup"
       ) +
       ggplot2::coord_cartesian(ylim = c(NA, y_max + 3)) +
@@ -256,11 +259,11 @@ plot_builders <- list(
       ggplot2::labs(
         title = paste(variable, "by", x_axis),
         subtitle = paste0(
-          "Percentage distance relative to raw total | grouped by ",
+          "Loss as % of raw total | grouped by ",
           group_label
         ),
         x = x_axis,
-        y = "Distance (%)",
+        y = "Loss (%)",
         fill = "Subgroup"
       ) +
       ggplot2::coord_cartesian(ylim = c(0, y_max + 3)) +
@@ -283,9 +286,9 @@ plot_builders <- list(
       ggplot2::geom_col(position = "dodge") +
       ggplot2::labs(
         title = paste(total_col, "by", x_axis),
-        subtitle = paste0("Total distance | grouped by ", group_label),
+        subtitle = paste0("Total loss (raw - conf) | grouped by ", group_label),
         x = x_axis,
-        y = "Total distance",
+        y = "Total loss",
         fill = "Subgroup"
       ) +
       ggplot2::theme_minimal()
@@ -355,11 +358,11 @@ plot_builders <- list(
       ggplot2::labs(
         title = paste(variable, "by", x_axis),
         subtitle = paste0(
-          "Smoothed distance (% of raw total), columns = raw total | grouped by ",
+          "Smoothed loss (% of raw total), columns = raw total | grouped by ",
           group_label
         ),
         x = x_axis,
-        y = "Distance (%)",
+        y = "Loss (%)",
         colour = "Subgroup",
         fill = "Subgroup"
       ) +
@@ -444,7 +447,7 @@ aggregate_distances <- function(data,
       dplyr::summarise(
         dplyr::across(
           dplyr::all_of(distance_cols),
-          ~ sum(abs(.x), na.rm = TRUE),
+          ~ sum(.x, na.rm = TRUE),
           .names = "{.col}_total"
         ),
         dplyr::across(
@@ -456,7 +459,7 @@ aggregate_distances <- function(data,
         .groups = "drop"
       )
     
-    # Calculate percentage distance
+    # Calculate percentage loss = total loss / raw total * 100
     for (variable in distance_cols) {
       
       raw_variable <- sub("_dist$", "", variable)
@@ -520,5 +523,4 @@ names(results[["ethnicity"]]$plots)          # see everything that was built
 results[["ethnicity"]]$plots[[8]] 
 results[["ethnicity"]]$plots[[6]] # by position
 results[["ethnicity x region"]]$plots[[7]]
-out[["ethnicity"]]$plots[["<name from names()>"]]
 ################################################################################
